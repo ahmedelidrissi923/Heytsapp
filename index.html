@@ -491,24 +491,36 @@
         |                                            |
         ==============================================
         */
-        /* --- Base Styling for ALL screen sizes (Desktop First) --- */
+
+        /* --- 1. أولاً، ننسق القسم الرئيسي --- */
         .clients-section {
             padding: 60px 0;
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
         }
 
+        /* --- 2. ثانياً، نجعل الحاوية (.container) مركزية وقوية (هذا هو التغيير الأهم) --- */
+        .clients-section .container {
+            display: flex;
+            flex-direction: column;
+            /* لوضع العنوان فوق شبكة الأيقونات */
+            align-items: center;
+            /* هذا السطر يجبر كل شيء على التوسيط أفقيًا */
+        }
+
+        /* --- 3. ثالثًا، تنسيق شبكة الأيقونات نفسها --- */
         .clients-grid {
             display: flex;
             justify-content: center;
-            /* توسط العناصر في شاشة الحاسوب */
             align-items: center;
             flex-wrap: wrap;
-            /* السماح بنزول الأيقونات لسطر جديد في الحاسوب */
             gap: 60px;
-            /* المسافة بين الأيقونات في الحاسوب */
+            margin-top: 20px;
+            /* لإضافة مسافة تحت العنوان */
+            /* لم نعد بحاجة إلى margin: 0 auto; هنا لأن الأب يقوم بالتوسيط */
         }
 
+        /* --- 4. رابعًا، تنسيق الصور داخل الشبكة --- */
         .clients-grid img {
             height: 40px;
             width: auto;
@@ -516,7 +528,7 @@
             opacity: 0.6;
             transition: all 0.4s ease;
             margin: 0;
-            /* إعادة تعيين الهامش للشاشات الكبيرة */
+            /* نتأكد من عدم وجود هوامش قديمة */
         }
 
         .clients-grid img:hover {
@@ -947,45 +959,87 @@
         }
 
         /*
-        ==============================================
-        |                                            |
-        |                                            |
-        |                 صور العملاء                |
-        |                                            |
-        ==============================================
-        */
+==============================================
+|     الحل النهائي والقوي لتوسيط قسم العملاء     |
+==============================================
+*/
 
-        /* --- FINAL & CORRECTED Responsive Fix for Clients Grid --- */
+        /* --- 1. أولاً، ننسق القسم الرئيسي --- */
+        .clients-section {
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* --- 2. ثانياً، نجعل الحاوية (.container) مركزية وقوية (هذا هو التغيير الأهم) --- */
+        .clients-section .container {
+            display: flex;
+            flex-direction: column;
+            /* لوضع العنوان فوق شبكة الأيقونات */
+            align-items: center;
+            /* هذا السطر يجبر كل شيء على التوسيط أفقيًا */
+        }
+
+        /* --- 3. ثالثًا، تنسيق شبكة الأيقونات نفسها --- */
         .clients-grid {
-            flex-wrap: nowrap;
-            /* منع النزول لسطر جديد في الهاتف */
-            overflow-x: auto;
-            /* إضافة التمرير الأفقي */
-            justify-content: flex-start;
-            /* جعلها تبدأ من اليمين في الهاتف */
-            padding: 20px 10px;
-            gap: 0;
-            /* إلغاء المسافات القديمة في الهاتف */
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 60px;
+            margin-top: 20px;
+            /* لإضافة مسافة تحت العنوان */
+            /* لم نعد بحاجة إلى margin: 0 auto; هنا لأن الأب يقوم بالتوسيط */
         }
 
-        .clients-grid::-webkit-scrollbar {
-            display: none;
-        }
-
+        /* --- 4. رابعًا، تنسيق الصور داخل الشبكة --- */
         .clients-grid img {
             height: 40px;
             width: auto;
-            flex-shrink: 0;
-            margin-left: 50px;
-            /* استخدام الهامش للمسافة في الهاتف */
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.4s ease;
+            margin: 0;
+            /* نتأكد من عدم وجود هوامش قديمة */
         }
 
-        .clients-grid img:last-child {
-            margin-left: 0;
+        .clients-grid img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
         }
 
+        /* --- 5. خامسًا، تنسيق الهاتف (يبقى كما هو لأنه يعمل جيدًا) --- */
+        @media (max-width: 768px) {
+            .clients-grid {
+                flex-wrap: nowrap;
+                /* منع النزول لسطر جديد في الهاتف */
+                overflow-x: auto;
+                /* إضافة التمرير الأفقي */
+                justify-content: flex-start;
+                /* جعلها تبدأ من اليمين في الهاتف */
+                padding: 20px 10px;
+                gap: 0;
+                /* إلغاء المسافات القديمة في الهاتف */
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            .clients-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .clients-grid img {
+                height: 40px;
+                width: auto;
+                flex-shrink: 0;
+                margin-left: 50px;
+                /* استخدام الهامش للمسافة في الهاتف */
+            }
+
+            .clients-grid img:last-child {
+                margin-left: 0;
+            }
+        }
 
         /*
         ==============================================

@@ -343,16 +343,27 @@
             color: var(--primary);
         }
 
-        .navbar ul li a.active::after {
+        /* --- New Animated Underline for Active Nav Link --- */
+
+        /* This sets up the base line for all links, but keeps it hidden (width: 0) */
+        .navbar ul li a::after {
             content: '';
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 0;
+            /* يبدأ بعرض صفر (مخفي) */
+            height: 3px;
+            /* سمك الخط */
             background-color: var(--primary);
-            border-radius: 50%;
-            bottom: -10px;
-            right: 50%;
-            transform: translateX(50%);
+            bottom: 0;
+            right: 0;
+            transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* حركة ناعمة لتغيير العرض */
+        }
+
+        /* When a link becomes active, this rule makes the line expand to full width */
+        .navbar ul li a.active::after {
+            width: 100%;
+            /* يتم شحن الخط ليملأ 100% من عرض الرابط */
         }
 
         /*
@@ -480,6 +491,7 @@
         |                                            |
         ==============================================
         */
+        /* --- Base Styling for ALL screen sizes (Desktop First) --- */
         .clients-section {
             padding: 60px 0;
             border-top: 1px solid var(--border-color);
@@ -489,16 +501,22 @@
         .clients-grid {
             display: flex;
             justify-content: center;
+            /* توسط العناصر في شاشة الحاسوب */
             align-items: center;
             flex-wrap: wrap;
+            /* السماح بنزول الأيقونات لسطر جديد في الحاسوب */
             gap: 60px;
+            /* المسافة بين الأيقونات في الحاسوب */
         }
 
         .clients-grid img {
-            height: 35px;
+            height: 40px;
+            width: auto;
             filter: grayscale(100%);
             opacity: 0.6;
             transition: all 0.4s ease;
+            margin: 0;
+            /* إعادة تعيين الهامش للشاشات الكبيرة */
         }
 
         .clients-grid img:hover {
@@ -629,8 +647,17 @@
         |                                            |
         ==============================================
         */
+        /* --- Enhanced Stats Section with Faint Background Image --- */
+        /* --- Enhanced Stats Section with Correct Background Size --- */
         .stats-section {
-            background-image: var(--gradient-dark);
+            /* ... (background-image and other properties remain the same) ... */
+            background-image: linear-gradient(rgba(12, 45, 50, 0.98), rgba(12, 45, 50, 0.98)), url('img/Capture d’écran 2025-06-12 155454.jpg');
+
+            background-size: 100% auto;
+            /* <-- هذا هو التعديل الوحيد المطلوب */
+
+            background-position: center center;
+            background-attachment: fixed;
         }
 
         .stats-grid {
@@ -922,6 +949,47 @@
         /*
         ==============================================
         |                                            |
+        |                                            |
+        |                 صور العملاء                |
+        |                                            |
+        ==============================================
+        */
+
+        /* --- FINAL & CORRECTED Responsive Fix for Clients Grid --- */
+        .clients-grid {
+            flex-wrap: nowrap;
+            /* منع النزول لسطر جديد في الهاتف */
+            overflow-x: auto;
+            /* إضافة التمرير الأفقي */
+            justify-content: flex-start;
+            /* جعلها تبدأ من اليمين في الهاتف */
+            padding: 20px 10px;
+            gap: 0;
+            /* إلغاء المسافات القديمة في الهاتف */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .clients-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .clients-grid img {
+            height: 40px;
+            width: auto;
+            flex-shrink: 0;
+            margin-left: 50px;
+            /* استخدام الهامش للمسافة في الهاتف */
+        }
+
+        .clients-grid img:last-child {
+            margin-left: 0;
+        }
+
+
+        /*
+        ==============================================
+        |                                            |
         |           13. FINAL CTA SECTION            |
         |           (الدعوة الأخيرة للعمل)            |
         |                                            |
@@ -1082,7 +1150,9 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 40px;
             }
+
         }
+
 
         /* The rest of the CSS (Testimonials, Gallery, FAQ, Footer, Responsive) will be in the next part... */
     </style>
@@ -1131,13 +1201,13 @@
         <section class="clients-section">
             <div class="container">
                 <h3 class="section-title" style="font-size: 1.2rem; color: var(--text-light); margin-bottom: 40px;">يثق
-                    به أكثر من 500+ مسوق وصاحب متجر حول العالم</h3>
+                    به أكثر من 100+ مسوق وصاحب متجر في الوطن العربي</h3>
                 <div class="clients-grid">
-                    <img src="img/LOGO.png" alt="شعار عميل وهمي" style="height: 40px;">
-                    <img src="img/LOGO.png" alt="شعار عميل وهمي" style="height: 40px;">
-                    <img src="img/LOGO.png" alt="شعار عميل وهمي" style="height: 40px;">
-                    <img src="img/LOGO.png" alt="شعار عميل وهمي" style="height: 40px;">
-                    <img src="img/LOGO.png" alt="شعار عميل وهمي" style="height: 40px;">
+                    <img src="img/C1.png" alt="شعار عميل " style="height: 40px;">
+                    <img src="img/C2.png" alt="شعار عميل " style="height: 40px;">
+                    <img src="img/C3.png" alt="شعار عميل " style="height: 40px;">
+                    <img src="img/C4.png" alt="شعار عميل " style="height: 40px;">
+                    <img src="img/C5.png" alt="شعار عميل " style="height: 40px;">
                 </div>
             </div>
         </section>
@@ -1168,7 +1238,7 @@
         <section id="about" class="section">
             <div class="container">
                 <div class="section-title fade-in-up animate-on-scroll">
-                    <span class="section-tagline">الحل الأمثل لـ</span>
+                    <span class="section-tagline">الحل الأمثل لك</span>
                     <h2>مصمم خصيصًا لمواجهة تحدياتك اليومية</h2>
                 </div>
                 <div class="feature-spotlight">
@@ -1466,8 +1536,8 @@
                 <p>نؤمن بالشفافية، وهذه لمحة سريعة على الواجهات البسيطة والقوية التي ستتعامل معها يوميًا.</p>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item animate-on-scroll fade-in-up"><img
-                        src="img/Capture d’écran 2025-06-03 042001.jpg" alt="Heytsapp Screenshot 1"></div>
+                <div class="gallery-item animate-on-scroll fade-in-up"><img src="Capture d’écran 2025-06-03 042001.jpg"
+                        alt="Heytsapp Screenshot 1"></div>
                 <div class="gallery-item animate-on-scroll fade-in-up" style="transition-delay: 0.1s;"><img
                         src="img/Capture d’écran 2025-06-03 042019.jpg" alt="Heytsapp Screenshot 2"></div>
                 <div class="gallery-item animate-on-scroll fade-in-up" style="transition-delay: 0.2s;"><img
@@ -1661,20 +1731,39 @@
             // --------------------------------------------------
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section[id]');
+            // --------------------------------------------------
+            // 3. Active Navigation Link on Scroll (IMPROVED LOGIC)
+            // This new function keeps the last known active link highlighted
+            // even when scrolling over sections that are not in the nav menu.
+            // --------------------------------------------------
             function updateActiveLink() {
-                let currentSectionId = '';
+                let bestMatchId = ''; // This will store the ID of the last section that HAS a nav link
+
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
-                    if (window.scrollY >= sectionTop - 150) { // Offset to trigger a bit earlier
-                        currentSectionId = section.getAttribute('id');
+                    const sectionId = section.getAttribute('id');
+
+                    // Check if a navigation link for the current section actually exists in the header
+                    const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+
+                    if (window.scrollY >= sectionTop - 80) {
+                        // We only update our 'best match' if the section we're in has a real link in the nav
+                        if (correspondingLink) {
+                            bestMatchId = sectionId;
+                        }
+                        // If there's no corresponding link (like for the 'comparison' section),
+                        // we do nothing, so 'bestMatchId' keeps its previous value (e.g., 'process').
+                        // This is exactly what we want.
                     }
                 });
 
+                // Now, we highlight the link that matches the last known valid section
                 navLinks.forEach(link => {
-                    link.classList.remove('active');
                     const linkHref = link.getAttribute('href');
-                    if (linkHref && linkHref.substring(1) === currentSectionId) {
+                    if (linkHref === '#' + bestMatchId) {
                         link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
                     }
                 });
             }

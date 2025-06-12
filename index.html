@@ -1075,6 +1075,82 @@
         }
 
         /*
+==============================================
+|         LIGHTBOX STYLING - تنسيق نافذة الصور        |
+==============================================
+*/
+
+        /* --- The overlay background --- */
+        .lightbox {
+            display: none;
+            /* يكون مخفيًا بشكل افتراضي */
+            position: fixed;
+            /* يجعله يغطي كامل الشاشة */
+            z-index: 2000;
+            /* يضمن ظهوره فوق كل شيء */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* يسمح بالتمرير إذا كانت الصورة كبيرة جدا */
+            background-color: rgba(12, 45, 50, 0.9);
+            /* خلفية داكنة شبه شفافة */
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- The image inside the lightbox --- */
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 85%;
+            max-height: 85vh;
+            animation-name: zoomIn;
+            animation-duration: 0.5s;
+            border-radius: 5px;
+        }
+
+        /* --- The animation for the popup effect --- */
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* --- The close button (X) --- */
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #f1f1f1;
+            font-size: 50px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        /* --- Make gallery images clickable --- */
+        .gallery-item img {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            opacity: 0.8;
+        }
+
+        /*
         ==============================================
         |                                            |
         |               14. FOOTER                   |
@@ -1896,10 +1972,49 @@
                     });
                 }
             });
+            // --------------------------------------------------
+            // 6. Image Gallery Lightbox Functionality
+            // This code handles the popup for the gallery images.
+            // --------------------------------------------------
+            const lightbox = document.getElementById('imageLightbox');
+            if (lightbox) {
+                const lightboxImage = document.getElementById('lightboxImage');
+                const galleryImages = document.querySelectorAll('.gallery-item img');
+                const closeBtn = document.querySelector('.lightbox-close');
+
+                galleryImages.forEach(img => {
+                    img.addEventListener('click', function () {
+                        lightbox.style.display = 'flex';
+                        lightboxImage.src = this.src;
+                    });
+                });
+
+                // Function to close the lightbox
+                function closeLightbox() {
+                    lightbox.style.display = 'none';
+                }
+
+                // Close when clicking the 'X' button
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', closeLightbox);
+                }
+
+                // Close when clicking on the dark background area
+                lightbox.addEventListener('click', function (event) {
+                    if (event.target === lightbox) {
+                        closeLightbox();
+                    }
+                });
+            }
 
         });
-    </script>
 
+
+    </script>
+    <div id="imageLightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImage">
+    </div>
 </body>
 
 </html>

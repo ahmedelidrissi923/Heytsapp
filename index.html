@@ -1278,9 +1278,6 @@
         }
 
         @media (max-width: 768px) {
-            .navbar {
-                display: none;
-            }
 
             .comparison-grid {
                 grid-template-columns: 1fr;
@@ -1300,11 +1297,104 @@
                 gap: 40px;
             }
 
+
         }
 
         /* --- Hide Mobile Tap Highlight --- */
         * {
             -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ==============================================
+|         MOBILE NAVIGATION MENU STYLES          |
+|            (تنسيقات قائمة الهاتف)             |
+==============================================
+*/
+
+        /* The hamburger button itself */
+        .mobile-menu-toggle {
+            display: none;
+            /* Hidden on desktop */
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* The overlay that darkens the page */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0s 0.4s;
+        }
+
+        .nav-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.4s ease;
+        }
+
+
+        @media (max-width: 768px) {
+
+            /* Show the hamburger button on mobile */
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            /* Style the navigation menu for mobile */
+            .navbar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                /* Start off-screen (for RTL) */
+                width: 300px;
+                height: 100vh;
+                background-color: var(--white-color);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+                transition: right 0.4s ease-in-out;
+                padding-top: 80px;
+            }
+
+            /* When the menu is open, slide it in */
+            .navbar.is-open {
+                right: 0;
+            }
+
+            /* Change nav links to be a vertical list */
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .navbar ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar ul li a {
+                display: block;
+                padding: 15px;
+                width: 100%;
+                font-size: 1.2rem;
+            }
+
+            .navbar ul li a.special-link {
+                margin: 10px auto;
+                width: fit-content;
+            }
         }
 
         /* The rest of the CSS (Testimonials, Gallery, FAQ, Footer, Responsive) will be in the next part... */
@@ -1318,7 +1408,7 @@
             <a href="#hero" class="logo">
                 <img src="img/LOGO_2.png" alt="Heytsapp Logo">
             </a>
-            <nav class="navbar">
+            <nav class="navbar" id="main-nav">
                 <ul>
                     <li><a href="#features" class="nav-link">المميزات</a></li>
                     <li><a href="#process" class="nav-link">كيف يعمل</a></li>
@@ -1330,6 +1420,8 @@
                 </ul>
             </nav>
             <a href="#download" class="btn btn-primary">ابدأ الآن</a>
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Open Menu">
+                <i class="fas fa-bars"></i> </button>
         </div>
     </header>
 
@@ -2030,6 +2122,26 @@
                     }
                 });
             }
+            // --------------------------------------------------
+            // Mobile Menu Toggle Functionality
+            // --------------------------------------------------
+            const menuToggle = document.getElementById('mobile-menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            const body = document.body;
+
+            // Create the overlay div
+            const overlay = document.createElement('div');
+            overlay.className = 'nav-overlay';
+            body.appendChild(overlay);
+
+            function toggleMenu() {
+                mainNav.classList.toggle('is-open');
+                overlay.classList.toggle('is-open');
+            }
+
+            menuToggle.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu); // Close menu when clicking overlay
+
 
         });
 

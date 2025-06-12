@@ -17,22 +17,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
+
     <style>
         /*
-        ملاحظة: هذا هو نفس كود الـ CSS من الصفحة الرئيسية.
-        تم نسخه بالكامل هنا لضمان أن هذه الصفحة تعمل بشكل مستقل وبنفس التصميم.
-        */
+                    ==============================================
+                    |                                            |
+                    |          1. GLOBAL STYLES & VARIABLES      |
+                    |          (الأنماط العامة والمتغيرات)         |
+                    |                                            |
+                    ==============================================
+                    */
         :root {
+            /* Heytsapp Official Color Palette */
             --primary: #3bae5e;
             --primary-dark: #2a8c4a;
             --dark: #0c2d32;
-            --mid-navy: #1C2541;
             --light-bg: #f4f9f5;
             --white-color: #FFFFFF;
             --text-dark: #0c2d32;
             --text-light: #556a6e;
             --border-color: #e9eef2;
-            --stars-color: #FFD700;
             --radius: 12px;
             --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
             --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.07);
@@ -41,12 +46,14 @@
             --gradient-dark: linear-gradient(135deg, var(--dark) 0%, #1c2541 100%);
         }
 
+        /* Basic Reset & Body */
         *,
         *::before,
         *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         html {
@@ -62,6 +69,7 @@
             overflow-x: hidden;
         }
 
+        /* General Components */
         .container {
             width: 100%;
             max-width: 1240px;
@@ -83,23 +91,6 @@
             line-height: 1.3;
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-        }
-
-        h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-        }
-
-        h3 {
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-        }
-
-        h4 {
-            font-size: 1.5rem;
-        }
-
         p {
             margin-bottom: 1.2rem;
             font-size: 1.1rem;
@@ -117,45 +108,9 @@
             display: block;
         }
 
-        .section-tagline {
-            display: inline-block;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 40px;
-            font-size: 1rem;
-            font-weight: 700;
-            text-align: center;
-            cursor: pointer;
-            border: 2px solid transparent;
-            border-radius: 50px;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            user-select: none;
-        }
-
-        .btn-primary {
-            color: var(--white-color);
-            background-image: var(--gradient-primary);
-            background-size: 200% auto;
-            box-shadow: 0 4px 15px rgba(59, 174, 94, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 7px 20px rgba(59, 174, 94, 0.4);
-            background-position: right center;
-        }
-
         .section {
             padding: 100px 0;
             position: relative;
-            overflow: hidden;
         }
 
         .section-bg {
@@ -173,11 +128,34 @@
 
         .section-title p {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
         }
 
-        /* Animation Styles */
+        /* Buttons Styling */
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-primary {
+            color: var(--white-color);
+            background-image: var(--gradient-primary);
+            box-shadow: 0 4px 15px rgba(59, 174, 94, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 20px rgba(59, 174, 94, 0.4);
+        }
+
+        /* Animation initial states */
         .animate-on-scroll {
             opacity: 0;
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -187,20 +165,17 @@
             transform: translateY(50px);
         }
 
-        .slide-in-right {
-            transform: translateX(-100px);
-        }
-
-        .slide-in-left {
-            transform: translateX(100px);
-        }
-
         .animate-on-scroll.is-visible {
             opacity: 1;
             transform: translate(0, 0);
         }
 
-        /* Header Styles */
+        /*
+                    ==============================================
+                    |          2. HEADER & NAVIGATION              |
+                    |             (الشريط العلوي والقائمة)          |
+                    ==============================================
+                    */
         .header {
             position: sticky;
             top: 0;
@@ -230,28 +205,28 @@
             height: 45px;
         }
 
+        .navbar {
+            display: flex;
+            /* Kept for desktop */
+        }
+
         .navbar ul {
             list-style: none;
             display: flex;
             gap: 35px;
             margin: 0;
             padding: 0;
+            align-items: center;
         }
 
         .navbar ul li a {
             font-weight: 700;
             font-size: 1rem;
             color: var(--dark);
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s ease;
+            text-decoration: none;
         }
 
         .navbar ul li a:hover {
-            color: var(--primary);
-        }
-
-        .navbar ul li a.active {
             color: var(--primary);
         }
 
@@ -268,11 +243,20 @@
             color: var(--white-color) !important;
         }
 
-        /* Page-specific Styles for help.html */
+        /*
+                    ==============================================
+                    |         3. HELP PAGE SPECIFIC STYLES         |
+                    |            (تنسيقات صفحة المساعدة)           |
+                    ==============================================
+                    */
+        .help-page-section {
+            overflow: visible !important;
+            /* Fix for Sticky Sidebar */
+        }
+
         .help-article-grid {
             display: grid;
             grid-template-columns: 280px 1fr;
-            /* Sidebar and main content */
             gap: 60px;
             align-items: flex-start;
         }
@@ -280,7 +264,6 @@
         .help-sidebar {
             position: sticky;
             top: 120px;
-            /* Header height + padding */
         }
 
         .help-sidebar ul {
@@ -350,15 +333,12 @@
             margin: auto;
         }
 
-        .help-content ul {
-            padding-right: 20px;
-        }
-
-        .help-content li {
-            margin-bottom: 10px;
-        }
-
-        /* Footer Styles */
+        /*
+                    ==============================================
+                    |        4. FOOTER & GENERAL COMPONENTS        |
+                    |            (الفوتر ومكونات عامة)             |
+                    ==============================================
+                    */
         .footer {
             background-color: var(--dark);
             color: rgba(255, 255, 255, 0.7);
@@ -391,28 +371,66 @@
         .footer .copyright {
             font-size: .9rem;
             color: #aaa;
-            border-top: 1px solid var(--mid-navy);
+            border-top: 1px solid #3a4766;
             padding-top: 30px;
             margin-top: 30px;
         }
 
-        /* Responsive adjustments */
+        /*
+                    ==============================================
+                    |        5. MOBILE NAVIGATION & RESPONSIVE     |
+                    |            (قائمة الهاتف والتجاوب)           |
+                    ==============================================
+                    */
+
+        /* Base style for the hamburger button (hidden on desktop) */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* The dark overlay for when the menu is open */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0s 0.4s;
+        }
+
+        .nav-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Responsive styles for tablets */
         @media (max-width: 992px) {
             .help-article-grid {
                 grid-template-columns: 1fr;
-                /* Stack sidebar on top */
             }
 
             .help-sidebar {
                 position: static;
-                margin-bottom: 40px;
                 width: 100%;
+                margin-bottom: 40px;
             }
 
             .help-sidebar ul {
                 display: flex;
                 flex-wrap: wrap;
                 border: none;
+                justify-content: center;
             }
 
             .help-sidebar ul li a {
@@ -427,12 +445,59 @@
             }
         }
 
+        /* Responsive styles for mobile phones */
         @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+                /* Show the hamburger button */
+            }
+
             .navbar {
-                display: none;
+                display: block;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background-color: var(--white-color);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 999;
+                transition: right 0.4s ease-in-out;
+                padding-top: 80px;
+            }
+
+            .navbar.is-open {
+                right: 0;
+                /* Slide in when open */
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                gap: 10px;
+            }
+
+            .navbar ul li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar ul li a {
+                display: block;
+                padding: 15px;
+                width: 100%;
+                font-size: 1.2rem;
+            }
+
+            .navbar ul li a.special-link {
+                margin: 10px auto;
+                width: fit-content;
             }
         }
     </style>
+
+
 </head>
 
 <body>
@@ -442,7 +507,7 @@
             <a href="index.html" class="logo">
                 <img src="img/LOGO_2.png" alt="Heytsapp Logo">
             </a>
-            <nav class="navbar">
+            <nav class="navbar" id="main-nav">
                 <ul>
                     <li><a href="index.html#features" class="nav-link">المميزات</a></li>
                     <li><a href="index.html#process" class="nav-link">كيف يعمل</a></li>
@@ -454,6 +519,8 @@
                 </ul>
             </nav>
             <a href="index.html#pricing" class="btn btn-primary">ابدأ الآن</a>
+            <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Open Menu">
+                <i class="fas fa-bars"></i> </button>
         </div>
     </header>
 
@@ -469,7 +536,7 @@
             </div>
         </section>
 
-        <section class="section" style="padding-top: 60px;">
+        <section class="section help-page-section" style="padding-top: 60px;">
             <div class="container">
                 <div class="help-article-grid">
                     <aside class="help-sidebar">
@@ -615,7 +682,7 @@
     <footer class="footer">
         <div class="container">
             <div class="logo">
-                <img src="img/LOGO_2.png" alt="Heytsapp Logo">
+                <img src="img/LOGO_3.png" alt="Heytsapp Logo">
             </div>
             <div class="social-icons">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -665,6 +732,25 @@
                         link.classList.add('active');
                     }
                 });
+                // --------------------------------------------------
+                // Mobile Menu Toggle Functionality
+                // --------------------------------------------------
+                const menuToggle = document.getElementById('mobile-menu-toggle');
+                const mainNav = document.getElementById('main-nav');
+                const body = document.body;
+
+                // Create the overlay div
+                const overlay = document.createElement('div');
+                overlay.className = 'nav-overlay';
+                body.appendChild(overlay);
+
+                function toggleMenu() {
+                    mainNav.classList.toggle('is-open');
+                    overlay.classList.toggle('is-open');
+                }
+
+                menuToggle.addEventListener('click', toggleMenu);
+                overlay.addEventListener('click', toggleMenu); // Close menu when clicking overlay
             }
             window.addEventListener('scroll', updateActiveHelpLink);
         });
